@@ -1,0 +1,19 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameStats.cs">
+    <Files>
+      <File FileName="Assets\Scripts\BirdSpawner.cs" Line="62" Column="56" />
+      <File FileName="Assets\Scripts\BirdMovement.cs" Line="40" Column="29" />
+      <File FileName="Assets\Scripts\ObjectPool.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FarmerMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerInput.cs" Line="25" Column="5" />
+      <File FileName="Assets\Scripts\PointGenerator.cs" Line="18" Column="28" />
+      <File FileName="Assets\Scripts\GameStats.cs" Line="96" Column="29" />
+      <File FileName="Assets\Scripts\ChaseAwayBirds.cs" Line="14" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
