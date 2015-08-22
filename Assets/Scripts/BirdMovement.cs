@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BirdMovement : MonoBehaviour
 {
+	public GameObject wing;
 	public float speed = 10.0f;
 	public float reachedTolerance = 0.1f;
 	bool chasedAway = false;
@@ -12,6 +13,8 @@ public class BirdMovement : MonoBehaviour
 	public BirdHandler targetField;
 
 	Vector2 targetPosition;
+
+	bool animationIsRunning = false;
 
 	// Use this for initialization
 	void Start ()
@@ -31,6 +34,12 @@ public class BirdMovement : MonoBehaviour
 		{
 			Vector2 direction = targetVector.normalized;
 			transform.position += (Vector3)direction * speed * Time.deltaTime;
+
+			if(!animationIsRunning)
+			{
+				StartCoroutine(AnimateWings());
+			}
+
 			if(direction.x > 0)
 				transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 			else
@@ -41,8 +50,13 @@ public class BirdMovement : MonoBehaviour
 		{
 			if(!chasedAway && !onField)
 			{
+				wing.SetActive(false);
 				onField = true;
 				targetField.birdCount++;
+			}
+			else if(chasedAway && onField)
+			{
+				Destroy(this);
 			}
 		}
 	}
@@ -55,5 +69,15 @@ public class BirdMovement : MonoBehaviour
 			targetPosition = BirdSpawner.birdSpawner.GeneratePosition();
 			targetField.birdCount--;
 		}
+	}
+
+	IEnumerator AnimateWings()
+	{
+		animationIsRunning = true;
+		wing.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		wing.SetActive(false);
+		yield return new WaitForSeconds(0.1f);
+		animationIsRunning = false;
 	}
 }

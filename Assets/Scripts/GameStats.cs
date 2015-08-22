@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 
 public class GameStats : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameStats : MonoBehaviour
 	public Text UIBonus;
 	public Image UIHealth;
 	public GameObject UIGameOver;
+
+	public GameObject[] gameObjectsToDeactivateOnGameOver;
 
 	public float birdCheckIntervall = 1.0f;
 	public float damagePerBird = 0.001f;
@@ -93,6 +96,18 @@ public class GameStats : MonoBehaviour
 		{
 			UIGameOver.gameObject.SetActive(true);
 			Time.timeScale = 0.0f;
+			Camera.main.GetComponent<Blur>().enabled = true;
+			foreach(GameObject gameObjectToDeactivateOnGameOver in gameObjectsToDeactivateOnGameOver)
+			{
+				gameObjectToDeactivateOnGameOver.SetActive(false);
+			}
 		}
+	}
+
+	public void Restart()
+	{
+		Application.LoadLevel(Application.loadedLevel);
+		Time.timeScale = 1.0f;
+		
 	}
 }

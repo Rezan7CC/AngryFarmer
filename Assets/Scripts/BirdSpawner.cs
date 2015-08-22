@@ -38,6 +38,7 @@ public class BirdSpawner : MonoBehaviour
 	void SpawnBird()
 	{
 		spawnTime -= timeToDecreaseAfterSpawn;
+		spawnTime = Mathf.Clamp(spawnTime, minSpawnTime, spawnTime);
 		currentSpawnTime = spawnTime;
 
 		GameObject[] fields = GameObject.FindGameObjectsWithTag("Field");
