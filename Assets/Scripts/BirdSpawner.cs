@@ -27,7 +27,6 @@ public class BirdSpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(currentSpawnTime);
 		currentSpawnTime -= Time.deltaTime;
 		if(currentSpawnTime <= 0)
 		{
