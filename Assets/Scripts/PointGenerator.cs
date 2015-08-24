@@ -14,7 +14,7 @@ public class PointGenerator : MonoBehaviour
 	public int currentPoints;
 
 	public Image UIPoints;
-	public Text debugText;
+	public Image UIPointsInactive;
 
 	// Use this for initialization
 	void Start ()
@@ -72,6 +72,10 @@ public class PointGenerator : MonoBehaviour
 		if(collider.tag == "Player")
 		{
 			pause = true;
+			Color tempColor = UIPointsInactive.color;
+			tempColor.a = 0.5f;
+			UIPointsInactive.color = tempColor;
+
 			if(collectPoints)
 			{
 				SubmitPoints();
@@ -97,6 +101,9 @@ public class PointGenerator : MonoBehaviour
 		if(collider.tag == "Player")
 		{
 			pause = false;
+			Color tempColor = UIPointsInactive.color;
+			tempColor.a = 0.0f;
+			UIPointsInactive.color = tempColor;
 		}
 	}
 }
