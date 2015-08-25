@@ -66,6 +66,7 @@ public class GameStats : MonoBehaviour
 		{
 			yield return new WaitForSeconds(bonusIntervall);
 			SetBonus(currentBonus + bonusIncreasePerIntervall);
+			StartCoroutine(FontSizeEffect(2.0f));
 		}
 	}
 
@@ -109,5 +110,18 @@ public class GameStats : MonoBehaviour
 		Application.LoadLevel(Application.loadedLevel);
 		Time.timeScale = 1.0f;
 		
+	}
+
+	IEnumerator FontSizeEffect(float duration)
+	{
+		UIBonus.fontSize = 20;
+		float currentDuration = 0.0f;
+		
+		while(currentDuration <= duration)
+		{
+			currentDuration += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		GameStats.gameStats.UIBonus.fontSize = 14;
 	}
 }

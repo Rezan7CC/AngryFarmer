@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour 
 {
-	float inputRadius = 1.0f;
+//	float inputRadius = 1.0f;
 	FarmerMovement farmerMovement;
 	// Use this for initialization
 	void Awake()
@@ -32,16 +32,12 @@ public class PlayerInput : MonoBehaviour
 	{
 		farmerMovement.targetPosition = Camera.main.ScreenToWorldPoint((Vector3)screenPosition);
 
-		Collider2D collider = Physics2D.OverlapCircle(farmerMovement.targetPosition, inputRadius);
+//		Collider2D collider = Physics2D.OverlapCircle(farmerMovement.targetPosition, inputRadius);
 
 		GameObject[] fields = GameObject.FindGameObjectsWithTag("Field");
 		foreach(GameObject field in fields)
 		{
 			field.GetComponent<PointGenerator>().collectPoints = false;
 		}
-
-
-		if(collider != null)
-		Debug.Log(collider.name);
 	}
 }

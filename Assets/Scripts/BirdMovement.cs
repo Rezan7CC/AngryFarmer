@@ -5,6 +5,8 @@ public class BirdMovement : MonoBehaviour
 {
 	public GameObject wing;
 	public GameObject head;
+	public GameObject featherPS;
+	public GameObject featherBurstPSPrefab;
 	public float speed = 10.0f;
 	public float reachedTolerance = 0.1f;
 	bool chasedAway = false;
@@ -58,7 +60,10 @@ public class BirdMovement : MonoBehaviour
 			}
 			else if(chasedAway && onField)
 			{
-				Destroy(this);
+				if(featherPS != null)
+					featherPS.transform.parent = null;
+				BirdSpawner.birdSpawner.objectPool.objects.Remove(gameObject);
+				Destroy(gameObject);
 			}
 		}
 	}
@@ -67,6 +72,8 @@ public class BirdMovement : MonoBehaviour
 	{
 		if(!chasedAway && onField)
 		{
+			featherPS.SetActive(true);
+			Instantiate(featherBurstPSPrefab, transform.position, Quaternion.identity);
 			chasedAway = true;
 			targetPosition = BirdSpawner.birdSpawner.GeneratePosition();
 			targetField.birdCount--;

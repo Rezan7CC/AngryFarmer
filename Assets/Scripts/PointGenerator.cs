@@ -15,6 +15,7 @@ public class PointGenerator : MonoBehaviour
 
 	public Image UIPoints;
 	public Image UIPointsInactive;
+	public GameObject submitPointsPSPrefab;
 
 	// Use this for initialization
 	void Start ()
@@ -63,8 +64,11 @@ public class PointGenerator : MonoBehaviour
 
 	public void SubmitPoints()
 	{
-		GameStats.gameStats.AddPoints(currentPoints);
-		SetPoints(0);
+		if(currentPoints > 0)
+		{
+			StartCoroutine(SubmitPointsEffect(2.0f));
+			StartCoroutine(FontSizeEffect(1.0f));
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D collider)
@@ -105,5 +109,42 @@ public class PointGenerator : MonoBehaviour
 			tempColor.a = 0.0f;
 			UIPointsInactive.color = tempColor;
 		}
+	}
+
+	IEnumerator SubmitPointsEffect(float duration)
+	{
+		Vector3 startPositon = transform.position;
+		Vector3 endPosition = new Vector3(8f, 5f, 0.0f);
+		float currentDuration = 0.0f;
+		GameObject submitPointsPS = Instantiate(submitPointsPSPrefab, startPositon, Quaternion.identity) as GameObject;
+		int pointsToAdd = currentPoints;
+		SetPoints(0);
+
+		while(currentDuration <= duration)
+		{
+			currentDuration += Time.deltaTime;
+			
+			Vector3 tempPosition = gameObject.transform.position;
+			tempPosition = Vector3.Lerp(startPositon, endPosition, currentDuration / duration);
+			submitPointsPS.transform.position = tempPosition;
+			
+			yield return new WaitForEndOfFrame();
+		}
+
+		Destroy(submitPointsPS);
+		GameStats.gameStats.AddPoints(pointsToAdd);
+	}
+
+	IEnumerator FontSizeEffect(float duration)
+	{
+		GameStats.gameStats.UIScore.fontSize = 32;
+		float currentDuration = 0.0f;
+		
+		while(currentDuration <= duration)
+		{
+			currentDuration += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		GameStats.gameStats.UIScore.fontSize = 25;
 	}
 }
