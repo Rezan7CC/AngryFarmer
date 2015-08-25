@@ -4,6 +4,7 @@ using System.Collections;
 public class BirdMovement : MonoBehaviour
 {
 	public GameObject wing;
+	public GameObject head;
 	public float speed = 10.0f;
 	public float reachedTolerance = 0.1f;
 	bool chasedAway = false;
@@ -53,6 +54,7 @@ public class BirdMovement : MonoBehaviour
 				wing.SetActive(false);
 				onField = true;
 				targetField.birdCount++;
+				StartCoroutine(AnimateHead());
 			}
 			else if(chasedAway && onField)
 			{
@@ -79,5 +81,56 @@ public class BirdMovement : MonoBehaviour
 		wing.SetActive(false);
 		yield return new WaitForSeconds(0.1f);
 		animationIsRunning = false;
+	}
+
+	IEnumerator AnimateHead()
+	{
+		float headDownDuration = 0.25f;
+		float headUpDuration = 0.25f;
+
+		while(onField && !chasedAway)
+		{
+			StartCoroutine(HeadDown(headDownDuration));
+			yield return new WaitForSeconds(headDownDuration);
+			StartCoroutine(HeadUp(headUpDuration));
+			yield return new WaitForSeconds(headUpDuration);
+		}
+		StartCoroutine(HeadUp(headUpDuration));
+	}
+
+	IEnumerator HeadUp(float duration)
+	{
+		float startAngle = head.transform.localRotation.eulerAngles.z;
+		float currentDuration = 0.0f;
+
+		while(currentDuration <= duration)
+		{
+			currentDuration += Time.deltaTime;
+
+			Vector3 tempRotation = head.transform.localRotation.eulerAngles;
+			tempRotation.z = Mathf.LerpAngle(startAngle, 0.0f, currentDuration / duration);
+			head.transform.localRotation = Quaternion.Euler(tempRotation);
+
+			yield return new WaitForEndOfFrame();
+		}
+		head.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+	}
+
+	IEnumerator HeadDown(float duration)
+	{
+		float startAngle = head.transform.localRotation.eulerAngles.z;
+		float currentDuration = 0.0f;
+		
+		while(currentDuration <= duration)
+		{
+			currentDuration += Time.deltaTime;
+			
+			Vector3 tempRotation = head.transform.localRotation.eulerAngles;
+			tempRotation.z = Mathf.LerpAngle(startAngle, 30.0f, currentDuration / duration);
+			head.transform.localRotation = Quaternion.Euler(tempRotation);
+			
+			yield return new WaitForEndOfFrame();
+		}
+		head.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 30.0f);
 	}
 }
