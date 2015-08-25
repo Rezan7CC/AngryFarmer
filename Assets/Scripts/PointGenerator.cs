@@ -137,7 +137,7 @@ public class PointGenerator : MonoBehaviour
 
 	IEnumerator FontSizeEffect(float duration)
 	{
-		GameStats.gameStats.UIScore.fontSize = 32;
+		GameStats.gameStats.UIScore.fontSize = 80;
 		float currentDuration = 0.0f;
 		
 		while(currentDuration <= duration)
@@ -145,6 +145,6 @@ public class PointGenerator : MonoBehaviour
 			currentDuration += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-		GameStats.gameStats.UIScore.fontSize = 25;
+		GameStats.gameStats.UIScore.fontSize = 65;
 	}
 }

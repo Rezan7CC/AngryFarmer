@@ -114,7 +114,7 @@ public class GameStats : MonoBehaviour
 
 	IEnumerator FontSizeEffect(float duration)
 	{
-		UIBonus.fontSize = 20;
+		UIBonus.fontSize = 55;
 		float currentDuration = 0.0f;
 		
 		while(currentDuration <= duration)
@@ -122,6 +122,6 @@ public class GameStats : MonoBehaviour
 			currentDuration += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-		GameStats.gameStats.UIBonus.fontSize = 14;
+		GameStats.gameStats.UIBonus.fontSize = 40;
 	}
 }
