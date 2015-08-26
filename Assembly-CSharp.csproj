@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PointCollector.cs" />
      <Compile Include="Assets\Scripts\AutoDestroyPS.cs" />
      <Compile Include="Assets\Scripts\BirdHandler.cs" />
      <Compile Include="Assets\Scripts\BirdMovement.cs" />

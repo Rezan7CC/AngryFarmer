@@ -80,25 +80,25 @@ public class PointGenerator : MonoBehaviour
 			tempColor.a = 0.5f;
 			UIPointsInactive.color = tempColor;
 
-			if(collectPoints)
-			{
-				SubmitPoints();
-				collectPoints = false;
-			}
+//			if(collectPoints)
+//			{
+//				SubmitPoints();
+//				collectPoints = false;
+//			}
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D collider)
-	{
-		if(collider.tag == "Player")
-		{
-			if(collectPoints)
-			{
-				SubmitPoints();
-				collectPoints = false;
-			}
-		}
-	}
+//	void OnTriggerStay2D(Collider2D collider)
+//	{
+//		if(collider.tag == "Player")
+//		{
+//			if(collectPoints)
+//			{
+//				SubmitPoints();
+//				collectPoints = false;
+//			}
+//		}
+//	}
 
 	void OnTriggerExit2D(Collider2D collider)
 	{
